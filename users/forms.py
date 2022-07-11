@@ -48,8 +48,10 @@ class RegisterForm(forms.ModelForm):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])
 
+
         if commit is True:
             user.save()
+            Profile.objects.create(user=user)
 
         return user
 
