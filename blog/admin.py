@@ -1,0 +1,31 @@
+from django.contrib import admin
+from .models import Post, Comment, Contact
+
+# Register your models here.
+
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'status', 'created_on')
+    list_filter = ("status",)
+    search_fields = ['title', 'content']
+    prepopulated_fields = {'slug': ('title',)}
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'body', 'post', 'created_on', 'active')
+    list_filter = ('active', 'created_on')
+    search_fields = ('name', 'email', 'body')
+    actions = ['approve_comments']
+
+    @staticmethod
+    def approve_comments(request, queryset):
+        queryset.update(active=True)
+
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'subject', 'date']
+
+
+admin.site.register(Post, PostAdmin),
+admin.site.register(Contact, ContactAdmin)
