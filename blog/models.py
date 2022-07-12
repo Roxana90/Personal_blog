@@ -1,7 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
-# Create your models here.
+
+class Likes(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='likes')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, related_name='likes')
+    object_id = models.IntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+
 STATUS = (
     (0, 'Draft'),
     (1, 'Publish')
@@ -17,7 +27,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
     image = models.ImageField(upload_to='img', default=None, null=True)
-
+    likes = GenericRelation(Likes)
 
     class Meta:
         ordering = ['-created_on']

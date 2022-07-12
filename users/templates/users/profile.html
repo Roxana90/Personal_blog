@@ -3,7 +3,8 @@
 
 {% block content %}
 
-    <h1>Profile page</h1>
+   <h1>Profile page</h1>
+    <br/><br/>
     <p><strong>{% block title %}{{ user.first_name }} {{ user.last_name }} Profile{% endblock %}</strong></p>
     <p><strong>First name:</strong> {{ user.first_name }}</p>
     <p><strong>Last name:</strong> {{ user.last_name }}</p>
@@ -18,4 +19,7 @@
         {{ form.as_p }}
         <input type="submit" class="btn btn-primary" value="Change profile image" />
     </form>
+    <br/><br/>
+<br/><br/>
 {% endblock %}
+

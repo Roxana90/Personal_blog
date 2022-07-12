@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import generic
-from .models import Post
+from .models import Post, Likes
 from .forms import CommentForm, ContactForm
 from django.contrib import messages
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -55,3 +57,18 @@ def contact_page(request):
         'forms': forms
     }
     return render(request, 'contact.html', context)
+
+
+@login_required
+def like_post(request, slug):
+    if request.method != 'POST':
+        raise Http404('This method is not supported.')
+
+    post = get_object_or_404(Post, slug=slug)
+    like = post.likes.filter(user=request.user).first()
+    if like is None:
+        Likes.objects.create(user=request.user, content_object=post)
+    else:
+        like.delete()
+
+    return redirect(reverse('blog:post_detail', args=[slug]))

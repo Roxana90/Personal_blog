@@ -13,9 +13,19 @@
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
-
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
+        <p>
+      <strong>Likes:</strong> {{ post.likes.all | length }}
+    </p>
+    {% if user.is_authenticated %}
+        <p>
+      <form method="post" action="{% url 'blog:like' post.slug %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary  btn-sm" value="Like/Unlike" />
+      </form>
+    </p>
+        {% endif %}
         <!-- comments -->
         <h2>{{ comments.count }} comments</h2>
 
@@ -53,5 +63,3 @@
 <a href="/" class="btn btn-primary"><- Back to index</a><br /><br />
 
 {% endblock content %}
-
-

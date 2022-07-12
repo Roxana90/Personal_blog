@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<br/><br/>
 {% block title %}Login Page{% endblock%}
+<br/><br/>
+    <br/><br/>
 <div>
     <form method="post" action="{% url 'users:login' %}">
         {% csrf_token %}
@@ -18,4 +21,10 @@
         <input type="submit" class="btn btn-primary" value="Login" />
     </form>
     </div>
+        <br/><br/>
+    <br/><br/>
+<br/><br/>
+<br/><br/>
+<br/><br/>
+
 {% endblock %}
