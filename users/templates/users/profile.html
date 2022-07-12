@@ -10,7 +10,7 @@
     <p><strong>Email:</strong> {{ user.email }}</p>
     <p><strong> {{ user.profile.image.url }} </strong></p>
     <p>
-        <img src="{{ user.profile.image.url }}" width="100"/>
+        <img src="{{ user.profile.image_url }}" width="100"/>
     </p>
     <hr />
     <form method="post" action="{% url 'users:profile' %}" enctype="multipart/form-data">

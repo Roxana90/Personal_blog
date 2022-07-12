@@ -26,7 +26,7 @@
 						<div class="form-group">
                 {% if messages %}
                   {% for message in messages %}
-							<span{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: green">{{ message }}</span>
+							<span {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: green">{{ message }}</span>
                   {% endfor %}
                 {% endif %}
               </div>

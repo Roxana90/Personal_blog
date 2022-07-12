@@ -18,6 +18,7 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     image = models.ImageField(upload_to='img', default=None, null=True)
 
+
     class Meta:
         ordering = ['-created_on']
 
