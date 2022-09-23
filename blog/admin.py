@@ -18,10 +18,6 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'body')
     actions = ['approve_comments']
 
-    @staticmethod
-    def approve_comments(request, queryset):
-        queryset.update(active=True)
-
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'subject', 'date']

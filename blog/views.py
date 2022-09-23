@@ -16,10 +16,6 @@ class PostList(generic.ListView):
     paginate_by = 3
 
 
-# class PostDetail(generic.DetailView):
-#    model = Post
-#    template_name = 'post_detail.html'
-
 def post_detail(request, slug):
     template_name = 'post_detail.html'
     post = get_object_or_404(Post, slug=slug)
